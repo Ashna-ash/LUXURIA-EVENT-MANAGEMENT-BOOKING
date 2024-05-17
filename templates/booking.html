@@ -1,0 +1,93 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+booking
+{% endblock %}
+
+{% block content %}
+<style>
+  /* Add your CSS styles here */
+  body {
+    background-image: url('{% static 'images/page4.jpg' %}');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.8;
+  }
+
+  .container {
+    max-width: 500px; /* Adjust the max-width as needed */
+    width: 80%; /* Adjust the width as needed */
+    margin: 0 auto; /* Center the container */
+    padding: 20px;
+    background-color: #fff; /* Background color for the form */
+    background-image: url('{% static 'images/page4.jpg' %}');
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow */
+  }
+
+  h1 {
+    color: rgb(244, 23, 200);
+    margin-bottom: 20px;
+  }
+
+  /* Style for form fields */
+  input[type="text"],
+  input[type="email"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+
+  /* Style for the submit button */
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #09D960;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .about-heading {
+    font-size: 28px;
+    font-weight: bold;
+    color: #AE5253;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-top: 5px; /* Adjust margin-top to move the text higher */
+  }
+</style>
+
+<div class="container p-3 text-center">
+   <h2 class="about-heading">Book Your Events</h2>
+  <form id="booking-form" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Book Now</button>
+  </form>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const bookingForm = document.getElementById('booking-form');
+    const dateInput = bookingForm.querySelector('#id_booking_date'); // Adjust this selector based on your date input field ID
+
+    dateInput.addEventListener('change', function() {
+        const selectedDate = new Date(this.value);
+        const currentDate = new Date();
+
+        if (selectedDate < currentDate) {
+            alert("Sorry, it seems you've selected a date that has already passed. Please choose a future date for your event.");
+            this.value = ''; // Clear the date input field
+        }
+    });
+});
+</script>
+{% endblock %}

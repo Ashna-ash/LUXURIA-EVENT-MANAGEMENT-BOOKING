@@ -1,0 +1,39 @@
+
+
+{% extends 'base.html' %}
+{% load humanize %}
+{% load static %}
+{% block title %}
+Events
+{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background-color:lavender; /* Set the background color to purple */
+    }
+</style>
+
+<h2 class="text-center">Our Events</h2>
+<div class="container">
+    {% for event in events1 %}
+    <div class="card text-center" style="width: 20rem; display:inline-block;margin: 20px;">
+        <a href="{% url 'event_detail' event.id %}"> <!-- Anchor tag for event detail -->
+            <img src="{{ event.img.url }}" class="card-img-top" alt="..." height="150px" width="200px">
+            <div class="card-body">
+                <h5 class="card-title" style="font-weight: bold;">{{ event.name }}</h5> <!-- Event name wrapped with anchor tag -->
+                <p class="card-text">{{ event.details }}</p>
+                <p class="card-text">₹{{ event.cost|intcomma }}</p>
+            </div>
+        </a>
+        <div class="card-footer">
+            {% if user.is_authenticated %}
+            <a href="{% url 'booking' %}" class="btn btn-primary">Booking</a>
+            {% else %}
+            <a href="{% url 'register' %}" class="btn btn-primary">booking </a>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Events
+{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background-color:lavender; /* Set the background color to purple */
+    }
+</style>
+
+<h2 class="text-center">Events</h2>
+<div class="container">
+    {% for event in eve %}
+    <div class="card text-center" style="width: 20rem; display:inline-block;margin: 20px;">
+        <img src="{{ event.img.url }}" class="card-img-top" alt="..." height="150px" width="200px">
+        <div class="card-body">
+            <h5 class="card-title">
+                <a href="{% url 'event_detail' event.id %}">{{ event.name }}</a>
+            </h5>
+            <p class="card-text">{{ event.desc }}</p>
+        </div>
+        <a href="{% url 'booking' %}" class="btn btn-primary">Booking</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

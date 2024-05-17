@@ -1,0 +1,17 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+Thanks for Booking
+{% endblock %}
+
+{% block content %}
+<div class="container p-5 text-center">
+    <h1 style="color: rgb(244, 23, 200); font-size: 3rem;">Thanks for Booking!</h1>
+    <img src="path/to/confirmation_image.png" alt="Booking Confirmation Image" style="max-width: 100%; margin-bottom: 20px;">
+    <p style="font-size: 1.2rem;">Your event has been successfully booked. We appreciate your business!</p>
+    <button class="btn btn-primary mt-3" onclick="window.location.href='/my-events/'">View My Bookings</button>
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,120 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-Ds3kayrvv6X/JJUVDejEa+2OtMJF0dQyyA6LBUgB+pjKZ6EYMj0cp0G6vYSwIbS9" crossorigin="anonymous">
+   <style>
+       /* Style for feedback container */
+       .feedback-container {
+           border: 1px solid #ccc;
+           border-radius: 8px;
+           padding: 15px;
+            background-color:#E5BBD1;
+           margin-bottom: 20px;
+           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+           width:85%;
+           padding-left:35px;
+           margin-left:100px;
+           overflow: hidden; /* Ensure content clears the floated image */
+           position: relative; /* Position stars relative to this container */
+       }
+
+       /* Style for feedback content */
+       .feedback-content {
+           margin-bottom: 10px;
+           font-size: 16px;
+       }
+
+       /* Style for feedback image */
+       .feedback-image {
+           width: 200px;
+           height: 200px;
+           border-radius: 8px;
+           margin-top: 10px;
+           float: left; /* Float the image to the left */
+           margin-right: 15px; /* Add some space between the image and content */
+       }
+
+       /* Style for submitted by */
+       .submitted-by {
+           font-style: italic;
+           color: #888;
+           font-size: 14px;
+           display: flex;
+           align-items: center;
+       }
+
+       /* Style for user icon */
+       .user-icon {
+           margin-right: 5px;
+           color: #888;
+       }
+
+       /* Style for rating stars */
+       .rating-stars {
+           margin-top: 20px;
+       }
+
+       .rating-stars h3 {
+           margin-bottom: 10px;
+           margin-left:10px;
+       }
+
+       .rating-stars ul {
+           list-style: none;
+           padding: 0;
+           margin-left :20px;
+       }
+
+       .rating-stars li {
+           margin-bottom: 5px;
+           margin-left:10px;
+       }
+
+       .rating-stars i {
+           color: #ffd700; /* Gold color for filled stars */
+           font-size: 24px;
+           margin-right: 6px;
+       }
+       .center {
+           position: absolute;
+           top: 25%;
+           left: 70%;
+           transform: translate(-50%, -50%);
+       }
+
+   </style>
+</head>
+<body>
+<div class="rating-stars">
+    <h3>Google Ratings</h3>
+    <ul>
+        <li> 5   {% for _ in "12345" %}<i class="fas fa-star"></i>{% endfor %}</li>
+        <li> 4   {% for _ in "1234" %}<i class="fas fa-star"></i>{% endfor %}</li>
+        <li> 3   {% for _ in "123" %}<i class="fas fa-star"></i>{% endfor %}</li>
+        <li> 2   {% for _ in "12" %}<i class="fas fa-star"></i>{% endfor %}</li>
+        <li> 1   {% for _ in "1" %}<i class="fas fa-star"></i>{% endfor %}</li>
+        <li class="center"> Our Rating {% for _ in "1234" %}<i class="fas fa-star"></i>{% endfor %}</i></li>
+    </ul>
+</div><br><br>
+{% for feedback in feedbacks %}
+    <div class="feedback-container">
+        <img src="{{ feedback.image.url }}" class="feedback-image" alt="Feedback Image">
+        <div>
+            <p class="submitted-by">
+                <i class="fas fa-user user-icon"></i>
+                Submitted by: {{ feedback.created_by.username }}
+            </p><br><br>
+            <p class="feedback-content">{{ feedback.content }}</p><br><br>
+            <p class="feedback-date">{{ feedback.created_at }}</p>
+        </div>
+    </div>
+{% endfor %}
+</body>
+</html>
+{% endblock %}
+

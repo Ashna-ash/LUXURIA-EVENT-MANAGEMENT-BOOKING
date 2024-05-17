@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback</title>
+    <style>
+        body {
+            background-image: url('https://th.bing.com/th/id/OIP.4YXTktPmcCc45WIlFmoytwHaEo?w=287&h=180&c=7&r=0&o=5&pid=1.7');
+        }
+        .feedback-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .feedback-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color:#0D178D;
+            font-size:40px;
+            font-family:Times New Roman, serif;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group textarea {
+            width: 95%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background-color: #0056b3;
+        }
+
+        /* Style for the delete button */
+        .btn-delete {
+            background-color: #dc3545;
+        }
+
+        .btn-delete:hover {
+            background-color: #bd2130;
+        }
+
+        /* Style for the feedback section */
+        .feedback-section {
+            margin-top: 30px;
+            border-top: 2px solid #ccc;
+            padding-top: 20px;
+        }
+
+        /* Style for each feedback item */
+        .feedback-item {
+            background-color:#BBD4E5;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width:50%;
+            margin-left:300px;
+        }
+
+        .feedback-item img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .feedback-item p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+         h1 {
+            text-align: center;
+            font-size:60px;
+            color:gold;
+            font-family: 'Brush Script MT', cursive; /* Apply cursive font to h2 */
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add text shadow */
+            letter-spacing: 1px; /* Add letter spacing */
+
+
+        }
+    </style>
+</head>
+<body>
+<div class="feedback-container">
+    <h2>Feedback Form</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.content.label_tag }}
+            {{ form.content }}
+        </div>
+        <div class="form-group">
+            {{ form.image.label_tag }}
+            {{ form.image }}
+        </div>
+        <button type="submit" class="btn-submit">Submit Feedback</button>
+    </form>
+</div>
+
+<!-- Display user's feedbacks with delete button -->
+<div class="feedback-section">
+    <h1>My Feedbacks</h1>
+    {% for feedback in user_feedbacks %}
+        <div class="feedback-item">
+            <img src="{{ feedback.image.url }}" alt="Feedback Image">
+              <p>{{ feedback.content }}</p>
+            <form action="{% url 'delete_feedback' feedback.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn-delete">Delete</button>
+            </form>
+        </div>
+    {% endfor %}
+</div>
+</body>
+</html>
+{% endblock %}

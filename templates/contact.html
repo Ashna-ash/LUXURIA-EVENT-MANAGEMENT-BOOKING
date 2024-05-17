@@ -1,0 +1,61 @@
+
+
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Contact Us
+{% endblock %}
+
+{% block content %}
+<style>
+    .contact-page {
+        background-image: url('{% static 'images/page3.jpg' %}');
+        background-size: cover;
+        background-position:center;
+        color: black; /* Change text color to black for better visibility */
+    }
+    .contact-content {
+        padding: 140px; /* Add padding to the content to separate it from the edges */
+    }
+    .about-heading {
+    font-size: 28px;
+    font-weight: bold;
+    color:#AE5253;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-top:5px; /* Adjust margin-top to move the text higher */
+   }
+</style>
+
+<div class="container-fluid contact-page">
+    <div class="row">
+        <div class="col-md-20 col-md-offset-3 contact-content">
+            <h2 class="about-heading">LUXUIARA Event Management</h2><br><br>
+            <h2>Contact Us</h2><br><br>
+            <p>Have questions or need assistance? Get in touch with us!</p>
+            <p>You can reach out to us through the following channels:</p>
+            <ul>
+                <li><strong>Phone:</strong> +1-123-456-7890</li>
+                <li><strong>Email:</strong> info@luxuriaevents.com</li>
+                <li><strong>Address:</strong> 123 Main Street, City, Country</li>
+            </ul><br>
+            <p>You can fill out the form below and sign up</p>
+            <!-- Add your contact form HTML here -->
+            <form action="" method="post">
+                {% csrf_token %}
+                <!-- Include form fields for name, email, message, etc. -->
+                <!-- Example:
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name">
+                -->
+                <!-- Include a submit button -->
+                <a href="{% url 'register' %}">
+                   <button type="button">Signup</button>
+                </a>
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation</title>
+</head>
+<body>
+    <p>Dear {{ user.username }},</p>
+
+    <p>Thank you for booking the event "{{ event.name }}". Your booking has been confirmed.</p>
+
+    <p>Event details:</p>
+    <ul>
+        <li><strong>Name:</strong> {{ event.name }}</li>
+        <li><strong>Date:</strong> {{ date }}</li>
+        <li><strong>Contact:</strong>+1-123-456-7890</li>
+        <!-- Add more event details as needed -->
+    </ul>
+
+    <p>If you have any questions or need further assistance, feel free to contact us.</p>
+
+    <p>Best regards,<br>
+    Your Event Management Team</p>
+</body>
+</html>
